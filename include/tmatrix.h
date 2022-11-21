@@ -8,6 +8,7 @@
 #define __TDynamicMatrix_H__
 
 #include <iostream>
+#include <assert.h>
 
 using namespace std;
 
@@ -62,6 +63,8 @@ public:
     }
     TDynamicVector& operator=(TDynamicVector&& v) noexcept
     {
+        delete[]pMem;
+        pMem = nullptr;
         swap(*this, v);
         return *this;
     }
@@ -71,12 +74,10 @@ public:
     // индексация
     T& operator[](size_t ind)
     {
-        if (ind >= sz || ind < 0) throw out_of_range("bad index");
         return pMem[ind];
     }
     const T& operator[](size_t ind) const
     {
-        if (ind >= sz || ind < 0) throw out_of_range("bad index");
         return pMem[ind];
     }
     // индексация с контролем
@@ -193,7 +194,7 @@ public:
 // Динамическая матрица - 
 // шаблонная матрица на динамической памяти
 template<typename T>
-class TDynamicMatrix : private TDynamicVector<TDynamicVector<T>>
+class TDynamicMatrix : public TDynamicVector<TDynamicVector<T>>
 {
   using TDynamicVector<TDynamicVector<T>>::pMem;
   using TDynamicVector<TDynamicVector<T>>::sz;
@@ -207,7 +208,7 @@ public:
 
   using TDynamicVector<TDynamicVector<T>>::operator[];
   
-  size_t size() const noexcept { return sz; }
+
 
   // сравнение
   bool operator==(const TDynamicMatrix& m) const noexcept
@@ -262,7 +263,7 @@ public:
       for (size_t i = 0; i < sz; i++)
           for (size_t j = 0; j < sz; j++)
               for (size_t k = 0; k < sz; k++)
-                  tmp.pMem[i][j] += pMem[i][k] * pMem[k][j];
+                  tmp.pMem[i][j] += pMem[i][k] * m.pMem[k][j];
       return tmp;
   }
 

@@ -59,14 +59,14 @@ TEST(TDynamicVector, throws_when_set_element_with_negative_index)
 {
 	TDynamicVector<int> v(4);
 	int c=1;
-	ASSERT_ANY_THROW(v[-1] = c);
+	ASSERT_ANY_THROW(v.at(-1) = c);
 }
 
 TEST(TDynamicVector, throws_when_set_element_with_too_large_index)
 {
 	TDynamicVector<int> v(4);
 	int c = 1;
-	ASSERT_ANY_THROW(v[4] = c);
+	ASSERT_ANY_THROW(v.at(400) = c);
 }
 
 TEST(TDynamicVector, can_assign_vector_to_itself)
