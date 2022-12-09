@@ -158,11 +158,11 @@ public:
       }
       return tmp;
   }
-<<<<<<< HEAD
-  T operator*(const TDynamicVector& v) 
-=======
+
+
+
   T operator*(const TDynamicVector& v)
->>>>>>> 6db495e63ff872270bcb2e1f7cadbae3e8875ac2
+
   {
       if (sz != v.sz) throw out_of_range("differet lengths of vectors");
       T res = NULL;
