@@ -194,7 +194,7 @@ public:
 // Динамическая матрица - 
 // шаблонная матрица на динамической памяти
 template<typename T>
-class TDynamicMatrix : public TDynamicVector<TDynamicVector<T>>
+class TDynamicMatrix : private TDynamicVector<TDynamicVector<T>>
 {
   using TDynamicVector<TDynamicVector<T>>::pMem;
   using TDynamicVector<TDynamicVector<T>>::sz;
@@ -209,7 +209,10 @@ public:
   using TDynamicVector<TDynamicVector<T>>::operator[];
   
 
-
+  T& at(int i, int j) {
+      if (i < 0 || j < 0 || i >= sz || j >= sz) throw out_of_range("bad index");
+      return pMem[i][j];
+  }
   // сравнение
   bool operator==(const TDynamicMatrix& m) const noexcept
   {
@@ -287,6 +290,8 @@ public:
       }
       return ostr;
   }
+
+  size_t size() const noexcept { return sz; }
 };
 
 #endif

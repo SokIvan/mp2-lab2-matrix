@@ -23,8 +23,6 @@ void create_random_matrix(TDynamicMatrix<double> &M,int ran)
 void standart_test(TDynamicMatrix<double>& M1, TDynamicMatrix<double>& M2)
 {
     
-    int i, j;
-
     setlocale(LC_ALL, "Russian");
     cout << "Тестирование класс работы с матрицами"
         << endl;
